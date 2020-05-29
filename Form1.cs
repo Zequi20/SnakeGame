@@ -9,27 +9,49 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Media;
 
 namespace SnakeGame
 {
     public partial class Form1 : Form
     {
         Graphics pantalla;
+        Graphics pantalla2;
+        Bitmap pantallaAux;
         Cola cabeza = new Cola(20,20);
         List<Cola> cuerpo = new List<Cola>();
+        List<Pared> paredes = new List<Pared>();
         Comida comida = new Comida(50,30);
-        int dirx = 0;
-        int diry = 0;
-        int puntaje = 0;
+        int dirx = 0, diry = 0, puntaje = 0;
         bool pause=false;
-        int i = 0;
+        int i = 0,j = 0;
+        public int head=1;
+        int[,] escena1=new int[62,39];
         public Form1()
         {
             InitializeComponent();
             pantalla = screen.CreateGraphics();
+            pantallaAux = new Bitmap(Convert.ToInt32(screen.Width), Convert.ToInt32(screen.Height));
+            pantalla2 = Graphics.FromImage(pantallaAux);
             cuerpo.Add(new Cola(-10, -10));
             cuerpo.Add(new Cola(-10, -10));
+            for(i=0;i<62;i++)
+            {
+                for (j = 0; j < 39; j++)
+                {
+                    if(i==0||i==1)
+                        escena1[i, j] = 1;
+                }
+            }
+            for (i = 0; i < 62; i++)
+            {
+                for (j = 0; j < 39; j++)
+                {
+                    if(escena1[i,j]==1)
+                    {
+                        paredes.Add(new Pared((i) * 10, (j) * 10));
+                    }
+                }
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,13 +61,15 @@ namespace SnakeGame
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            pantalla.Clear(Color.LightGreen);
-            comida.dibujar(pantalla);
-            cabeza.dibujar(pantalla);
+            pantalla2.Clear(Color.LightGreen);
+            dibujarParedes();
+            comida.dibujar(pantalla2);
+            cabeza.dibujarCabeza(pantalla2, head);
             for (i = 0; i < cuerpo.Count; i++)
             {
-                cuerpo[i].dibujar(pantalla);
+                cuerpo[i].dibujar(pantalla2);
             }
+            pantalla.DrawImageUnscaled(pantallaAux,new Point(0,0));
             mover();
             comer();
             chocar();
@@ -84,6 +108,14 @@ namespace SnakeGame
                 }
             }
         }
+
+        void dibujarParedes()
+        {
+            for (i = 0; i < 62; i++)
+            {
+                paredes[i].dibujar(pantalla2);
+            }
+        }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode==Keys.P)
@@ -109,6 +141,7 @@ namespace SnakeGame
                     dirx = 0;
                     cabeza.bx = false;
                     cabeza.by = true;
+                    head = 1;
                 }
                 else if(e.KeyCode == Keys.Down)
                 {
@@ -116,6 +149,7 @@ namespace SnakeGame
                     dirx = 0;
                     cabeza.bx = false;
                     cabeza.by = true;
+                    head = 2;
                 }
             }
             if(cabeza.by ==true)
@@ -126,6 +160,7 @@ namespace SnakeGame
                     diry = 0;
                     cabeza.by = false;
                     cabeza.bx = true;
+                    head = 3;
                 }
                 if (e.KeyCode == Keys.Right)
                 {
@@ -133,6 +168,7 @@ namespace SnakeGame
                     diry = 0;
                     cabeza.by = false;
                     cabeza.bx = true;
+                    head = 4;
                 }
             }
         }
@@ -186,6 +222,11 @@ namespace SnakeGame
             {
                 cabeza.y = 390;
             }
+        }
+
+        void muros()
+        {
+
         }
 
         private void reiniciarToolStripMenuItem_Click(object sender, EventArgs e)
