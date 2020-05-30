@@ -45,7 +45,7 @@
             // 
             // screen
             // 
-            this.screen.BackColor = System.Drawing.Color.LightGreen;
+            this.screen.BackColor = System.Drawing.Color.Black;
             this.screen.Cursor = System.Windows.Forms.Cursors.Default;
             this.screen.Location = new System.Drawing.Point(2, 25);
             this.screen.Name = "screen";
@@ -113,7 +113,7 @@
             // lbl_pausa
             // 
             this.lbl_pausa.AutoSize = true;
-            this.lbl_pausa.BackColor = System.Drawing.Color.LightGreen;
+            this.lbl_pausa.BackColor = System.Drawing.Color.Black;
             this.lbl_pausa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_pausa.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lbl_pausa.Location = new System.Drawing.Point(480, 37);
@@ -125,10 +125,10 @@
             // 
             // lbl_over
             // 
-            this.lbl_over.BackColor = System.Drawing.Color.LightGreen;
+            this.lbl_over.BackColor = System.Drawing.Color.Black;
             this.lbl_over.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_over.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_over.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lbl_over.ForeColor = System.Drawing.Color.LightYellow;
             this.lbl_over.Location = new System.Drawing.Point(240, 210);
             this.lbl_over.Name = "lbl_over";
             this.lbl_over.Size = new System.Drawing.Size(165, 40);

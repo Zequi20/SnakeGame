@@ -18,8 +18,8 @@ namespace SnakeGame
         }
         public void ubicar()
         {
-            this.x = r.Next(0, 52) * 10;
-            this.y = r.Next(0, 29) * 10;
+            this.x = r.Next(1, 52) * 10;
+            this.y = r.Next(1, 29) * 10;
         }
 
         public Comida(int x,int y)

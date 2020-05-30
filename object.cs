@@ -17,7 +17,7 @@ namespace SnakeGame
         {
             int px = Math.Abs(this.x - objeto.x);
             int py = Math.Abs(this.y - objeto.y);
-            if(px >=0 && px < 10 && py >= 0 && py < 10)
+            if(px >=0 && px < ancho && py >= 0 && py < ancho)
             {
                 return true;
             }

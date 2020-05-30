@@ -11,6 +11,8 @@ namespace SnakeGame
     public class Cola : Object
     {
         Image s = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\snake.png");
+        Image t = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\tail.png");
+        Image Arrows = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\arr.png");
         Image headUp = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\HeadUp.gif");
         Image headDown = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\HeadDown.gif");
         Image headRight = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\HeadRight.gif");
@@ -22,9 +24,18 @@ namespace SnakeGame
         {
             g.DrawImage(s, x, y);
         }
+
+        public void dibujarF(Graphics g)
+        {
+            g.DrawImage(t, x, y);
+        }
         public void dibujarCabeza(Graphics g,int n)
         {
-            if(n==1)
+            if(n==0)
+            {
+                g.DrawImage(Arrows, x, y);
+            }
+            else if(n==1)
             {
                 g.DrawImage(headUp, x, y);
             }
