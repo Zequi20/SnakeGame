@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace SnakeGame
 {
@@ -13,6 +14,7 @@ namespace SnakeGame
         public int ax = 0;
         public int ay = 0;
         public int ancho=10;
+        public Random r = new Random();
         public bool colision(Object objeto)
         {
             int px = Math.Abs(this.x - objeto.x);

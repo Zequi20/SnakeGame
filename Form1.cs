@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 
@@ -19,16 +20,16 @@ namespace SnakeGame
         Graphics pantalla;
         Graphics buffer;
         Bitmap pantallaAux;
-        Cola cabeza = new Cola(245,130);
+        Cola cabeza = new Cola(150,130);
         List<Cola> cuerpo = new List<Cola>();
         List<Pared> muro = new List<Pared>();
-        Comida comida = new Comida(50,30);
+        Comida comida = new Comida(200, 30);
         int dirx = 0, diry = 0, puntaje = 0;
         bool pause=false;
         int i = 0, j = 0;
         public int head=0;
-        int dificultad=1;
         int[,] mapa = new int[62, 39];
+        int segundos=0,minutos=0;
         public Form1()
         {
             InitializeComponent();
@@ -38,41 +39,66 @@ namespace SnakeGame
             cuerpo.Add(new Cola(-10, -10));
             cuerpo.Add(new Cola(-10, -10));
             cargarMapa();
-            if (dificultad==1)
-            {
-                time.Interval = 50;
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            if (dif.Text == "1")
+            {
+                time.Interval = 60;
+            }
+            else if (dif.Text == "2")
+            {
+                time.Interval = 40;
+            }
+            else if (dif.Text == "3")
+            {
+                time.Interval = 30;
+            }
+            tJuego.Enabled = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            comer();
             buffer.Clear(Color.Black);
+            dibujarMapa();
             dibujarCuerpo();
             cabeza.dibujarCabeza(buffer, head);
-            comida.dibujar(buffer);
-            dibujarMapa();
+            comida.dibujar(buffer); 
+            limites();
             pantalla.DrawImageUnscaled(pantallaAux, new Point(0, 0));
             mover();
-            comer();
             chocar();
-            limites();
         }
 
         void cargarMapa()
         {
-            //StreamReader leer = new StreamReader(@"C:\Users\Ezequiel\source\repos\SnakeGame1\mapa.txt");
             for (i = 0; i < 62; i++)
             {
                 for (j = 0; j < 39; j++)
                 {
-                    if (mapa[i,j] == '1')
+                    if (i < 2 || i > 59)
                     {
-                        muro.Add(new Pared(i * 10, j * 10));
+                        mapa[i, j] = 1;
+                    }
+                    if (j < 2 || j > 36)
+                    {
+                        mapa[i, j] = 1;
+                    }
+                    if(i>30&&i<40&&j>15&&j<25)
+                    {
+                        mapa[i, j] = 1;
+                    }
+                }
+            }
+            for (i = 0; i < 62; i++)
+            {
+                for (j = 0; j < 39; j++)
+                {
+                    if (mapa[i,j]==1)
+                    {
+                        muro.Add(new Pared(i*10,j*10));
                     }
                 }
             }
@@ -90,6 +116,7 @@ namespace SnakeGame
                     cuerpo[i].dibujar(buffer);
                 }
             }
+            
         }
         public void mover()
         {
@@ -106,34 +133,47 @@ namespace SnakeGame
                 }
             }
         }
+
+        private void morir()
+        {
+            lbl_over.Visible = true;
+            SoundPlayer c = new SoundPlayer();
+            c.SoundLocation = "C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\Die.wav";
+            c.Load();
+            c.Play();
+            buffer.Clear(Color.Black);
+            cabeza.dibujarMuerto(buffer);
+            for (i = 0; i < cuerpo.Count; i++)
+            {
+                cuerpo[i].dibujarMuerto(buffer);
+            }
+            dibujarMapa();
+            pantalla.DrawImageUnscaled(pantallaAux, new Point(0, 0));
+            muro.Clear();
+            time.Enabled = false;
+            tJuego.Enabled = false;
+            puntos.Text = "Puntaje: " + puntaje.ToString();
+            puntos.Visible = true;
+            pMenu.Visible = true;
+            pSalir.Visible = true;
+            lblT.Text = ""+TimeShow.Text;
+            lblT.Visible = true;
+        }
+
         private void chocar()
         {
             for (i = 3; i < cuerpo.Count; i++)
             {
                 if (cuerpo[i].colision(cabeza) == true)
                 {
-                    time.Enabled = false;
-                    lbl_over.Visible = true;
-                    SoundPlayer c = new SoundPlayer();
-                    c.SoundLocation = "C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\hit.wav";
-                    c.Load();
-                    c.Play();
-                    MessageBox.Show("Hasta la proxima", "Chocaste");
-                    Application.Restart();
+                    morir();
                 }
             }
             for (i = 0; i < muro.Count; i++)
             {
                 if (muro[i].colision(cabeza) == true)
                 {
-                    time.Enabled = false;
-                    lbl_over.Visible = true;
-                    SoundPlayer c = new SoundPlayer();
-                    c.SoundLocation = "C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\hit.wav";
-                    c.Load();
-                    c.Play();
-                    MessageBox.Show("Hasta la proxima", "Chocaste");
-                    Application.Restart();
+                    morir();
                 }
             }
         }
@@ -146,12 +186,16 @@ namespace SnakeGame
                     time.Enabled = false;
                     pause = true;
                     lbl_pausa.Visible = true;
+                    pMenu.Visible = true;
+                    pSalir.Visible = true;
                 }
                 else if(pause==true)
                 {
                     time.Enabled = true;
                     pause = false;
                     lbl_pausa.Visible = false;
+                    pMenu.Visible = false;
+                    pSalir.Visible = false;
                 }
             }
             if(cabeza.bx==true)
@@ -196,16 +240,16 @@ namespace SnakeGame
 
         private void comer()
         {
-            if (cabeza.colision(comida) == true)
+            if (comida.colision(cabeza) == true)
             {
-                comida.ubicar();
+                ubicarComida();
                 cuerpo.Add(new Cola(-10,-10));
+                SoundPlayer n = new SoundPlayer();
+                n.SoundLocation = "C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\eat.wav";
+                n.Load();
+                n.Play();
                 puntaje++;
                 score.Text = puntaje.ToString();
-                SoundPlayer s = new SoundPlayer();
-                s.SoundLocation = "C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\eat.wav";
-                s.Load();
-                s.Play();
             }
         }
 
@@ -229,6 +273,11 @@ namespace SnakeGame
             }
         }
 
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
         void dibujarMapa()
         {
             for(i=0;i<muro.Count;i++)
@@ -237,14 +286,76 @@ namespace SnakeGame
             }
         }
 
-        private void reiniciarToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ubicarComida()
+        {
+            comida.ubicar();
+            for(i=0;i<muro.Count;i++)
+            {
+                if (comida.colision(muro[i])==true)
+                {
+                    ubicarComida();
+                }
+                if (comida.colision(cabeza) == true)
+                {
+                    ubicarComida();
+                }
+            }
+            for (i = 0; i < cuerpo.Count; i++)
+            {
+                if (comida.colision(cuerpo[i]) == true)
+                {
+                    ubicarComida();
+                }
+            }
+        }
+
+        private void lbl_over_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void puntos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tJuego_Tick(object sender, EventArgs e)
+        {
+            if (pause==false)
+            {
+                segundos++;
+                if (segundos == 60)
+                {
+                    segundos = 0;
+                    minutos++;
+                }
+                TimeShow.Text = "Tiempo " + minutos.ToString() + ":" + segundos.ToString();
+            }
+        }
+
+        private void lblT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pMenu_Click(object sender, EventArgs e)
         {
             Application.Restart();
         }
 
+        private void reiniciarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+         
+        }
+
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
     }
 }
