@@ -188,6 +188,7 @@ namespace SnakeGame
                     lbl_pausa.Visible = true;
                     pMenu.Visible = true;
                     pSalir.Visible = true;
+                    Help.Visible = true;
                 }
                 else if(pause==true)
                 {
@@ -196,6 +197,7 @@ namespace SnakeGame
                     lbl_pausa.Visible = false;
                     pMenu.Visible = false;
                     pSalir.Visible = false;
+                    Help.Visible = false;
                 }
             }
             if(cabeza.bx==true)
@@ -334,6 +336,17 @@ namespace SnakeGame
         }
 
         private void lblT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            Ayuda n = new Ayuda();
+            n.Show();
+        }
+
+        private void TimeShow_Click(object sender, EventArgs e)
         {
 
         }

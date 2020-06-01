@@ -122,7 +122,13 @@ namespace SnakeGame
 
         private void label8_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Snake\nBy: Zequi", "Acerca de:");
+        }
 
+        private void label9_Click(object sender, EventArgs e)
+        {
+            Ayuda n = new Ayuda();
+            n.Show();
         }
     }
 }
