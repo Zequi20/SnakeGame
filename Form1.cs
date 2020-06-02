@@ -20,16 +20,18 @@ namespace SnakeGame
         Graphics pantalla;
         Graphics buffer;
         Bitmap pantallaAux;
-        Cola cabeza = new Cola(150,130);
+        Cola cabeza = new Cola(300,190);
         List<Cola> cuerpo = new List<Cola>();
         List<Pared> muro = new List<Pared>();
-        Comida comida = new Comida(200, 30);
+        Comida comida = new Comida(250, 190);
         int dirx = 0, diry = 0, puntaje = 0;
         bool pause=false;
         int i = 0, j = 0;
         public int head=0;
         int[,] mapa = new int[62, 39];
         int segundos=0,minutos=0;
+        Image cuadro = Image.FromFile("Files\\cuadro.png");
+        public bool cuadricula = false;
         public Form1()
         {
             InitializeComponent();
@@ -38,22 +40,33 @@ namespace SnakeGame
             buffer = Graphics.FromImage(pantallaAux);
             cuerpo.Add(new Cola(-10, -10));
             cuerpo.Add(new Cola(-10, -10));
-            cargarMapa();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (nZona.Text == "1")
+            {
+                cargarMapa1();
+            }
+            if (nZona.Text == "2")
+            {
+                cargarMapa2();
+            }
+            if (nZona.Text == "3")
+            {
+                cargarMapa3();
+            }
             if (dif.Text == "1")
             {
-                time.Interval = 60;
+                time.Interval = 80;
             }
             else if (dif.Text == "2")
             {
-                time.Interval = 40;
+                time.Interval = 50;
             }
             else if (dif.Text == "3")
             {
-                time.Interval = 30;
+                time.Interval = 40;
             }
             tJuego.Enabled = true;
         }
@@ -62,6 +75,7 @@ namespace SnakeGame
         {
             comer();
             buffer.Clear(Color.Black);
+            dibujarCuadros();
             dibujarMapa();
             dibujarCuerpo();
             cabeza.dibujarCabeza(buffer, head);
@@ -72,12 +86,43 @@ namespace SnakeGame
             chocar();
         }
 
-        void cargarMapa()
+        void dibujarCuadros()
+        {
+            if (cuadricula == true)
+            {
+                for (i = 0; i < 62; i++)
+                {
+                    for (j = 0; j < 39; j++)
+                    {
+                        buffer.DrawImage(cuadro, i * 10, j * 10);
+                    }
+                }
+            }
+        }
+
+        void cargarMapa1()
         {
             for (i = 0; i < 62; i++)
             {
                 for (j = 0; j < 39; j++)
                 {
+                    if (j > 5 && j < 14)
+                    {
+                        mapa[i, j] = 1;
+                    }
+                    if (j > 24 && j < 33)
+                    {
+                        mapa[i, j] = 1;
+                    }
+                    if (i > 1 && i < 10)
+                    {
+                        mapa[i, j] = 0;
+                    }
+                    if (i > 51 && i < 60)
+                    {
+                        mapa[i, j] = 0;
+                    }
+
                     if (i < 2 || i > 59)
                     {
                         mapa[i, j] = 1;
@@ -86,8 +131,37 @@ namespace SnakeGame
                     {
                         mapa[i, j] = 1;
                     }
-                    if(i>30&&i<40&&j>15&&j<25)
+                    if (j > 13 && j < 25)
                     {
+                        mapa[i, j] = 0;
+                    }
+                }
+            }
+            for (i = 0; i < 62; i++)
+            {
+                for (j = 0; j < 39; j++)
+                {
+                    if (mapa[i, j] == 1)
+                    {
+                        muro.Add(new Pared(i * 10, j * 10));
+                    }
+                }
+            }
+        }
+
+        void cargarMapa2()
+        {
+            for (i = 0; i < 62; i++)
+            {
+                for (j = 0; j < 39; j++)
+                {
+                    if(j > 21 && j < 27)
+                    {
+                        mapa[i, j] = 1;
+                    }
+                    if (i>32 && i < 39)
+                    {
+                        mapa[i, j] = 1; 
                         mapa[i, j] = 1;
                     }
                 }
@@ -96,9 +170,9 @@ namespace SnakeGame
             {
                 for (j = 0; j < 39; j++)
                 {
-                    if (mapa[i,j]==1)
+                    if (mapa[i, j] == 1)
                     {
-                        muro.Add(new Pared(i*10,j*10));
+                        muro.Add(new Pared(i * 10, j * 10));
                     }
                 }
             }
@@ -118,6 +192,55 @@ namespace SnakeGame
             }
             
         }
+
+        void cargarMapa3()
+        {
+            for (i = 0; i < 62; i++)
+            {
+                for (j = 0; j < 39; j++)
+                {
+                    if (i > 4 && i < 24)
+                    {
+                        mapa[i, j] = 1;
+                    }
+                    if (i > 36 && i < 57)
+                    {
+                        mapa[i, j] = 1;
+                    }
+                    if (j > 1 && j < 5)
+                    {
+                        mapa[i, j] = 0;
+                    }
+                    if (j > 33 && j < 37)
+                    {
+                        mapa[i, j] = 0;
+                    }
+                    if (j > 15 && j < 23)
+                    {
+                        mapa[i, j] = 0;
+                    }
+                    if (i < 2 || i > 59)
+                    {
+                        mapa[i, j] = 1;
+                    }
+                    if (j < 2 || j > 36)
+                    {
+                        mapa[i, j] = 1;
+                    }
+                }
+            }
+            for (i = 0; i < 62; i++)
+            {
+                for (j = 0; j < 39; j++)
+                {
+                    if (mapa[i, j] == 1)
+                    {
+                        muro.Add(new Pared(i * 10, j * 10));
+                    }
+                }
+            }
+        }
+
         public void mover()
         {
             cabeza.setxy(cabeza.x + dirx, cabeza.y + diry);
@@ -138,7 +261,7 @@ namespace SnakeGame
         {
             lbl_over.Visible = true;
             SoundPlayer c = new SoundPlayer();
-            c.SoundLocation = "C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\Die.wav";
+            c.SoundLocation = "Files\\Die.wav";
             c.Load();
             c.Play();
             buffer.Clear(Color.Black);
@@ -158,6 +281,9 @@ namespace SnakeGame
             pSalir.Visible = true;
             lblT.Text = ""+TimeShow.Text;
             lblT.Visible = true;
+            StreamWriter flujoSalida = File.CreateText("Files\\Scores.txt");
+            flujoSalida.WriteLine(Jugador.Text+", "+puntaje.ToString()+", "+lblT.Text);
+            flujoSalida.Close();
         }
 
         private void chocar()
@@ -179,7 +305,7 @@ namespace SnakeGame
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode==Keys.P)
+            if(e.KeyCode==Keys.P|| e.KeyCode == Keys.Escape)
             {
                 if(pause==false)
                 {
@@ -189,6 +315,8 @@ namespace SnakeGame
                     pMenu.Visible = true;
                     pSalir.Visible = true;
                     Help.Visible = true;
+                    puntos.Visible = true;
+                    lblT.Visible = true;
                 }
                 else if(pause==true)
                 {
@@ -198,6 +326,8 @@ namespace SnakeGame
                     pMenu.Visible = false;
                     pSalir.Visible = false;
                     Help.Visible = false;
+                    puntos.Visible = false;
+                    lblT.Visible = false;
                 }
             }
             if(cabeza.bx==true)
@@ -247,7 +377,7 @@ namespace SnakeGame
                 ubicarComida();
                 cuerpo.Add(new Cola(-10,-10));
                 SoundPlayer n = new SoundPlayer();
-                n.SoundLocation = "C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\eat.wav";
+                n.SoundLocation = "Files\\eat.wav";
                 n.Load();
                 n.Play();
                 puntaje++;
@@ -332,6 +462,7 @@ namespace SnakeGame
                     minutos++;
                 }
                 TimeShow.Text = "Tiempo " + minutos.ToString() + ":" + segundos.ToString();
+                lblT.Text = "Tiempo " + minutos.ToString() + ":" + segundos.ToString();
             }
         }
 
@@ -347,6 +478,11 @@ namespace SnakeGame
         }
 
         private void TimeShow_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void screen_Click(object sender, EventArgs e)
         {
 
         }

@@ -9,7 +9,7 @@ namespace SnakeGame
 {
     public class Comida : Object
     {
-        Image c = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\egg.png");
+        Image c = Image.FromFile("Files\\egg.png");
         public void dibujar(Graphics g)
         {
             g.DrawImage(c, x, y);

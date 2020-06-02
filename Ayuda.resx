@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label3.Text" xml:space="preserve">
-    <value>El juego consiste en una serpiente cuyo objetivo es acumular puntos comiendo y creciendo en el menor tiempo posible.   Controles: Usa las flechas de direccion para controlar a la serpiente e intenta no chocar</value>
+    <value>El juego consiste en una serpiente cuyo objetivo es acumular puntos comiendo y creciendo en el menor tiempo posible.   Controles: Usa las flechas de direccion para controlar a la serpiente, Esc o p para pausar,  intenta no chocar.</value>
   </data>
 </root>

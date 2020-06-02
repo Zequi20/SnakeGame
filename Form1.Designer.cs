@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.score = new System.Windows.Forms.Label();
             this.time = new System.Windows.Forms.Timer(this.components);
@@ -45,6 +46,9 @@
             this.Help = new System.Windows.Forms.Label();
             this.screen = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.nZona = new System.Windows.Forms.Label();
+            this.Jugador = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,7 +98,7 @@
             this.lbl_over.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_over.Font = new System.Drawing.Font("Papyrus", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_over.ForeColor = System.Drawing.Color.LightYellow;
-            this.lbl_over.Location = new System.Drawing.Point(217, 137);
+            this.lbl_over.Location = new System.Drawing.Point(207, 173);
             this.lbl_over.Name = "lbl_over";
             this.lbl_over.Size = new System.Drawing.Size(218, 55);
             this.lbl_over.TabIndex = 5;
@@ -130,7 +134,7 @@
             this.puntos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.puntos.Font = new System.Drawing.Font("Papyrus", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.puntos.ForeColor = System.Drawing.Color.LightYellow;
-            this.puntos.Location = new System.Drawing.Point(221, 192);
+            this.puntos.Location = new System.Drawing.Point(1, 154);
             this.puntos.Name = "puntos";
             this.puntos.Size = new System.Drawing.Size(83, 33);
             this.puntos.TabIndex = 8;
@@ -150,7 +154,7 @@
             this.lblT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblT.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblT.ForeColor = System.Drawing.Color.LightYellow;
-            this.lblT.Location = new System.Drawing.Point(221, 225);
+            this.lblT.Location = new System.Drawing.Point(2, 225);
             this.lblT.Name = "lblT";
             this.lblT.Size = new System.Drawing.Size(67, 25);
             this.lblT.TabIndex = 9;
@@ -224,6 +228,7 @@
             this.screen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.screen.TabIndex = 0;
             this.screen.TabStop = false;
+            this.screen.Click += new System.EventHandler(this.screen_Click);
             // 
             // label3
             // 
@@ -235,12 +240,51 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "Snake";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Papyrus", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(281, 416);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 21);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Zona";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // nZona
+            // 
+            this.nZona.AutoSize = true;
+            this.nZona.Font = new System.Drawing.Font("Papyrus", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nZona.Location = new System.Drawing.Point(334, 416);
+            this.nZona.Name = "nZona";
+            this.nZona.Size = new System.Drawing.Size(18, 21);
+            this.nZona.TabIndex = 16;
+            this.nZona.Text = "1";
+            this.nZona.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // Jugador
+            // 
+            this.Jugador.AutoSize = true;
+            this.Jugador.BackColor = System.Drawing.Color.Black;
+            this.Jugador.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Jugador.Font = new System.Drawing.Font("Papyrus", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Jugador.ForeColor = System.Drawing.Color.LightYellow;
+            this.Jugador.Location = new System.Drawing.Point(-4, 34);
+            this.Jugador.Name = "Jugador";
+            this.Jugador.Size = new System.Drawing.Size(101, 33);
+            this.Jugador.TabIndex = 17;
+            this.Jugador.Text = "Jugador";
+            this.Jugador.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.Jugador);
+            this.Controls.Add(this.nZona);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Help);
             this.Controls.Add(this.pSalir);
@@ -257,6 +301,7 @@
             this.Controls.Add(this.screen);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Snake";
@@ -287,6 +332,9 @@
         private System.Windows.Forms.Label pSalir;
         private System.Windows.Forms.Label Help;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label nZona;
+        public System.Windows.Forms.Label Jugador;
     }
 }
 

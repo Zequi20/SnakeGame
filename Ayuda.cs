@@ -21,5 +21,10 @@ namespace SnakeGame
         {
             this.Close();
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("SnakeZ By: Ezequiel Pereira", "Acerca de");
+        }
     }
 }

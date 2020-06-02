@@ -14,6 +14,7 @@ namespace SnakeGame
     {
         Form1 v = new Form1();
         bool showDif = false;
+        bool showTB = false;
         public Menu()
         {
             InitializeComponent();
@@ -68,21 +69,37 @@ namespace SnakeGame
 
         }
 
+        void mostrarLbl()
+        {
+            label4.Visible = true;
+            label5.Visible = true;
+            label6.Visible = true;
+            showDif = true;
+            label10.Visible = true;
+            label11.Visible = true;
+            checkBox1.Visible = true;
+        }
+
+        void ocultarLbl()
+        {
+            label4.Visible = false;
+            label5.Visible = false;
+            label6.Visible = false;
+            showDif = false;
+            label10.Visible = false;
+            label11.Visible = false;
+            checkBox1.Visible = false;
+        }
+
         private void label3_Click(object sender, EventArgs e)
         {
             if(showDif==false)
             {
-                label4.Visible = true;
-                label5.Visible = true;
-                label6.Visible = true;
-                showDif = true;
+                mostrarLbl();
             }
             else
             {
-                label4.Visible = false;
-                label5.Visible = false;
-                label6.Visible = false;
-                showDif = false;
+                ocultarLbl();
             }
         }
 
@@ -122,13 +139,54 @@ namespace SnakeGame
 
         private void label8_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Snake\nBy: Zequi", "Acerca de:");
+            
         }
 
         private void label9_Click(object sender, EventArgs e)
         {
             Ayuda n = new Ayuda();
             n.Show();
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+            if(label11.Text=="<1>")
+            {
+                label11.Text = "<2>";
+                v.nZona.Text = "2";
+            }
+            else if (label11.Text == "<2>")
+            {
+                label11.Text = "<3>";
+                v.nZona.Text = "3";
+            }
+            else if (label11.Text == "<3>")
+            {
+                label11.Text = "<1>";
+                v.nZona.Text = "1";
+            }
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtJugador_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(v.cuadricula==false)
+            {
+                v.cuadricula = true;
+            }
+            else
+            {
+                v.cuadricula = false;
+            }
         }
     }
 }

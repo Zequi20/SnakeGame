@@ -9,7 +9,7 @@ namespace SnakeGame
 {
     public class Pared:Object
     {
-        Image bloque = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\muro.png");
+        Image bloque = Image.FromFile("Files\\muro.png");
         public Pared(int x,int y)
         {
             this.x = x;

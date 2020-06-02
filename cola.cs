@@ -10,14 +10,14 @@ namespace SnakeGame
 {
     public class Cola : Object
     {
-        Image s = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\snake1.png");
-        Image m = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\m.gif");
-        Image t = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\tail.png");
-        Image Arrows = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\arr.gif");
-        Image headUp = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\HeadUp.gif");
-        Image headDown = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\HeadDown.gif");
-        Image headRight = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\HeadLeft.gif");
-        Image headLeft = Image.FromFile("C:\\Users\\Ezequiel\\source\\repos\\SnakeGame1\\HeadRight.gif");
+        Image s = Image.FromFile("Files\\snake1.png");
+        Image m = Image.FromFile("Files\\m.gif");
+        Image t = Image.FromFile("Files\\tail.png");
+        Image Arrows = Image.FromFile("Files\\arr.gif");
+        Image headUp = Image.FromFile("Files\\HeadUp.gif");
+        Image headDown = Image.FromFile("Files\\HeadDown.gif");
+        Image headRight = Image.FromFile("Files\\HeadLeft.gif");
+        Image headLeft = Image.FromFile("Files\\HeadRight.gif");
         public bool bx = true; 
         public bool by = true;
         public bool cabeza = false;
