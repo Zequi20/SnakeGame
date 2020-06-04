@@ -17,6 +17,8 @@ namespace SnakeGame
 {
     public partial class Form1 : Form
     {
+        static string dir = Directory.GetParent(Directory.GetCurrentDirectory()).ToString();
+        public static string directorio = Directory.GetParent(dir).ToString();
         Graphics pantalla;
         Graphics buffer;
         Bitmap pantallaAux;
@@ -30,7 +32,7 @@ namespace SnakeGame
         public int head=0;
         int[,] mapa = new int[62, 39];
         int segundos=0,minutos=0;
-        Image cuadro = Image.FromFile("Files\\cuadro.png");
+        Image cuadro = Image.FromFile(@directorio+@"\cuadro.png");
         public bool cuadricula = false;
         public Form1()
         {
@@ -261,7 +263,7 @@ namespace SnakeGame
         {
             lbl_over.Visible = true;
             SoundPlayer c = new SoundPlayer();
-            c.SoundLocation = "Files\\Die.wav";
+            c.SoundLocation = @directorio + @"\Die.wav";
             c.Load();
             c.Play();
             buffer.Clear(Color.Black);
@@ -281,7 +283,7 @@ namespace SnakeGame
             pSalir.Visible = true;
             lblT.Text = ""+TimeShow.Text;
             lblT.Visible = true;
-            StreamWriter flujoSalida = File.CreateText("Files\\Scores.txt");
+            StreamWriter flujoSalida = File.CreateText(@directorio + @"\Scores.txt");
             flujoSalida.WriteLine(Jugador.Text+", "+puntaje.ToString()+", "+lblT.Text);
             flujoSalida.Close();
         }
@@ -377,7 +379,7 @@ namespace SnakeGame
                 ubicarComida();
                 cuerpo.Add(new Cola(-10,-10));
                 SoundPlayer n = new SoundPlayer();
-                n.SoundLocation = "Files\\eat.wav";
+                n.SoundLocation = @directorio + @"\eat.wav";
                 n.Load();
                 n.Play();
                 puntaje++;

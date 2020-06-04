@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,14 +11,16 @@ namespace SnakeGame
 {
     public class Cola : Object
     {
-        Image s = Image.FromFile("Files\\snake1.png");
-        Image m = Image.FromFile("Files\\m.gif");
-        Image t = Image.FromFile("Files\\tail.png");
-        Image Arrows = Image.FromFile("Files\\arr.gif");
-        Image headUp = Image.FromFile("Files\\HeadUp.gif");
-        Image headDown = Image.FromFile("Files\\HeadDown.gif");
-        Image headRight = Image.FromFile("Files\\HeadLeft.gif");
-        Image headLeft = Image.FromFile("Files\\HeadRight.gif");
+        static string dir = Directory.GetParent(Directory.GetCurrentDirectory()).ToString();
+        public static string directorio = Directory.GetParent(dir).ToString();
+        Image s = Image.FromFile(@directorio+@"\snake1.png");
+        Image m = Image.FromFile(@directorio+@"\m.gif");
+        Image t = Image.FromFile(@directorio+@"\tail.png");
+        Image Arrows = Image.FromFile(@directorio+@"\arr.gif");
+        Image headUp = Image.FromFile(@directorio+@"\HeadUp.gif");
+        Image headDown = Image.FromFile(@directorio+@"\HeadDown.gif");
+        Image headRight = Image.FromFile(@directorio + @"\HeadLeft.gif");
+        Image headLeft = Image.FromFile(@directorio + @"\HeadRight.gif");
         public bool bx = true; 
         public bool by = true;
         public bool cabeza = false;

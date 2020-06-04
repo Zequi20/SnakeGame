@@ -28,16 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(31, 86);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(285, 21);
-            this.comboBox1.TabIndex = 0;
             // 
             // Perfiles
             // 
@@ -45,7 +36,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(624, 441);
-            this.Controls.Add(this.comboBox1);
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.Name = "Perfiles";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -56,7 +46,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

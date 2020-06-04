@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace SnakeGame
 {
     public partial class Menu : Form
     {
         Form1 v = new Form1();
         bool showDif = false;
-        bool showTB = false;
         public Menu()
         {
             InitializeComponent();
@@ -66,7 +65,7 @@ namespace SnakeGame
 
         private void Menu_Load(object sender, EventArgs e)
         {
-
+        
         }
 
         void mostrarLbl()
